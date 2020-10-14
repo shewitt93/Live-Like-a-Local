@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
+from dotenv import load_dotenv
+load_dotenv()
+import os
+token = os.environ.get("SECRET_KEY")
+emailtoken = os.environ.get("EMAIL_HOST_PASSWORD")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'q2r-8cz(r^mzkrc+y1vli$b9!j=272+si#r*v4uc6qk9oymzcf'
+SECRET_KEY = token
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,6 +36,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'models.apps.ModelsConfig',
+   
     'rest_framework',
     'django_rest_passwordreset',
     'corsheaders',
@@ -99,7 +104,7 @@ EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIT_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_PASSWORD = emailtoken
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 

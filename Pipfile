@@ -11,6 +11,7 @@ djangorestframework = "*"
 djangorestframework-jwt = "*"
 django-cors-headers = "*"
 django-rest-passwordreset = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"
