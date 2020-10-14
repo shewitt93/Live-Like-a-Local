@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'models.apps.ModelsConfig',
     'rest_framework',
+    'django_rest_passwordreset',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -93,7 +94,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'llal.wsgi.application'
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIT_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
