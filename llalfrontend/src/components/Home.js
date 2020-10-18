@@ -6,6 +6,7 @@ class Home extends Component {
     Latitude: "",
     Longitude: "",
     location: "",
+    language: "",
   };
   componentDidMount() {
     fetch("http://localhost:8000/models/current_user/", {
