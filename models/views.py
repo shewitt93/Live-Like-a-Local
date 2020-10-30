@@ -5,11 +5,11 @@ from rest_framework import permissions, status, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer, UserSerializerWithToken, ChangePasswordSerializer
+from .serializers import UserSerializer, UserSerializerWithToken, ChangePasswordSerializer, PostSerializer
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
-
-
+from models.models import Post
+from rest_framework import viewsets
 
 @api_view(['GET'])
 def current_user(request):
@@ -37,6 +37,23 @@ class UserList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class PostViewSet(APIView):
+    def post(self, request):
+         serializer_class = PostSerializer(data=request.data)
+         if serializer.is_valid():
+             serializer.save()
+             return Reponse(serializer.data, status=status.HTTP_201_CREATED)
+         return Reponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request):
+        queryset = Post.objects.all()
+        serializer_class = PostSerializer(queryset, many=True)
+        return Response(serializer_class.data)
+    # def delete(self, request):
+        
+   
+   
+
 class ChangePasswordView(generics.UpdateAPIView):
     """
     An endpoint for changing password.
@@ -70,3 +87,4 @@ class ChangePasswordView(generics.UpdateAPIView):
             return Response(response)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        

@@ -1,11 +1,14 @@
 from django.urls import path, include
 
-from .views import current_user, UserList, ChangePasswordView
+from .views import current_user, UserList, ChangePasswordView, PostViewSet
 
 urlpatterns = [
     path('current_user/', current_user),
     path('users/', UserList.as_view()),
     path('change-password/', ChangePasswordView.as_view()),
     path('password_reset/', include('django_rest_passwordreset.urls')),
+    path('posts/', PostViewSet.as_view()),
+    path('posts/edits/<int:pk>', PostViewSet.as_view()),
+    path('posts/delete/<int:pk>', PostViewSet.as_view())
   
 ]

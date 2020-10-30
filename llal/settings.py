@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'social_django.middleware.SocialAuthExceptionMiddleware',
      'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -69,18 +70,25 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+    'DATETIME_FORMAT': "%m/%d/%Y %H:%M",
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
      'http://localhost:5000',
       'http://localhost:8000',
+      'https://localhost:3000',
+      
 )
 import datetime
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'llal.utils.my_jwt_response_handler',
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=10)
 }
+
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -110,8 +118,12 @@ EMAIL_HOST_PASSWORD = emailtoken
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'llal',
+        'USER': 'postgres',
+        'PORT': 5432,
+        'HOST': 'localhost',
+        'PASSWORD': 'postgres'
     }
 }
 

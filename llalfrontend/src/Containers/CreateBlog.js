@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import MediumEditor from "medium-editor";
-import axios from "axios";
+
 // import EditorHeader from "./EditorHeader";
-import "./../../node_modules/medium-editor/dist/css/medium-editor.min.css";
+// import "./../../node_modules/medium-editor/dist/css/medium-editor.min.css";
+import { getUser } from "../Actions/actions";
+require("medium-editor/dist/css/medium-editor.css");
+require("medium-editor/dist/css/themes/default.css");
 class Editor extends Component {
   constructor() {
     super();
@@ -33,17 +36,17 @@ class Editor extends Component {
     formdata.append("author_id", this.props.user._id);
     formdata.append("description", this.state.description);
     formdata.append("claps", 0);
-    axios
-      .post(`${_url}article`, formdata)
-      .then((res) => {
-        this.setState({
-          loading: false,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setState({ loading: false });
-      });
+    // axios
+    //   .post(`${_url}article`, formdata)
+    //   .then((res) => {
+    //     this.setState({
+    //       loading: false,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     this.setState({ loading: false });
+    //   });
   }
   handleClick() {
     this.refs.fileUploader.click();
@@ -60,6 +63,7 @@ class Editor extends Component {
     reader.readAsDataURL(file);
   }
   componentDidMount() {
+    this.props.getUser();
     const editor = new MediumEditor(/*dom, */ ".medium-editable", {
       autoLink: true,
       delay: 1000,
@@ -118,10 +122,6 @@ class Editor extends Component {
   render() {
     return (
       <div>
-        {/* <EditorHeader
-          publish={this.publishStory}
-          loading={this.state.loading}
-        /> */}
         <div className="container-fluid main-container">
           <div
             className="row animated fadeInUp"
@@ -133,9 +133,9 @@ class Editor extends Component {
             >
               <div className="post-metadata">
                 <img
-                  alt={this.props.user.name}
+                  alt={this.props.user.userData.username}
                   className="avatar-image"
-                  src={this.props.user.provider_pic}
+                  src={this.props.user.userData.provider_pic}
                   height="40"
                   width="40"
                 />
@@ -148,7 +148,7 @@ class Editor extends Component {
                   <small>{this.props.user.email}</small>
                 </div>
               </div>
-              <form className="editor-form main-editor" autocomplete="off">
+              <form className="editor-form main-editor" autoComplete="off">
                 <div
                   className={
                     this.state.imgSrc != null
@@ -181,7 +181,7 @@ class Editor extends Component {
                     className="medium-editable"
                   ></textarea>
                 </div>
-                <div class="hidden">
+                <div className="hidden">
                   <input
                     type="file"
                     onChange={() => this.previewImg()}
@@ -202,4 +202,4 @@ const mapStateToProps = (state) => {
     user: state,
   };
 };
-export default connect(mapStateToProps)(Editor);
+export default connect(mapStateToProps, { getUser })(Editor);
