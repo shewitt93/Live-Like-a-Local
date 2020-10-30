@@ -25,10 +25,8 @@ class Editor extends Component {
     this.setState({
       loading: true,
     });
-    const _url =
-      process.env.NODE_ENV === "production"
-        ? "/api/"
-        : "http://localhost:5000/api/";
+    const _url = "localhost:8000/";
+
     const formdata = new FormData();
     formdata.append("text", this.state.text);
     formdata.append("image", this.state.imgSrc);
@@ -36,6 +34,7 @@ class Editor extends Component {
     formdata.append("author_id", this.props.user._id);
     formdata.append("description", this.state.description);
     formdata.append("claps", 0);
+    console.log(formdata);
     // axios
     //   .post(`${_url}article`, formdata)
     //   .then((res) => {
@@ -46,7 +45,7 @@ class Editor extends Component {
     //   .catch((err) => {
     //     console.log(err);
     //     this.setState({ loading: false });
-    //   });
+    // });
   }
   handleClick() {
     this.refs.fileUploader.click();
