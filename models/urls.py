@@ -8,7 +8,6 @@ urlpatterns = [
     path('change-password/', ChangePasswordView.as_view()),
     path('password_reset/', include('django_rest_passwordreset.urls')),
     path('posts/', PostViewSet.as_view()),
-    path('posts/edits/<int:pk>', PostViewSet.as_view()),
-    path('posts/delete/<int:pk>', PostViewSet.as_view())
+    
   
 ]

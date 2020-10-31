@@ -17,6 +17,7 @@ class Editor extends Component {
       description: "",
       imgSrc: null,
       loading: false,
+      tags: [],
     };
     this.handleClick = this.handleClick.bind(this);
     this.previewImg = this.previewImg.bind(this);
@@ -26,17 +27,38 @@ class Editor extends Component {
     this.setState({
       loading: true,
     });
-    const _url = "localhost:8000/";
 
-    const formdata = new FormData();
-    formdata.append("text", this.state.text);
-    formdata.append("image", this.state.imgSrc);
-    formdata.append("title", document.getElementById("editor-title").value);
-    formdata.append("author_id", this.props.user._id);
-    formdata.append("description", this.state.description);
-    formdata.append("claps", 0);
-    console.log(formdata);
-    // axios
+    const formData = {
+      title: document.getElementById("editor-title").value,
+      text: this.state.text,
+      description: this.state.description,
+      imgSrc: this.state.imgSrc,
+
+      user: this.props.user.name,
+      likes: 0,
+      tags: null,
+    };
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `JWT ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(formData),
+    };
+
+    console.log(options);
+
+    fetch("http://localhost:8000/models/posts/", options)
+      .then((r) => r.json())
+      .then(() => {
+        this.setState({ loading: false });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ loading: false });
+      }); // axios
     //   .post(`${_url}article`, formdata)
     //   .then((res) => {
     //     this.setState({
@@ -207,3 +229,10 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, { getUser })(Editor);
+
+// formdata.append("text", this.state.text);
+//     formdata.append("image", this.state.imgSrc);
+//     formdata.append("title", document.getElementById("editor-title").value);
+//     formdata.append("author_id", this.props.user._id);
+//     formdata.append("description", this.state.description);
+//     formdata.append("claps", 0);
