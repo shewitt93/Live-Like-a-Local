@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import MediumEditor from "medium-editor";
+import EditorHeader from "../components/EditorHeader";
 
 // import EditorHeader from "./EditorHeader";
 // import "./../../node_modules/medium-editor/dist/css/medium-editor.min.css";
@@ -121,6 +122,10 @@ class Editor extends Component {
   render() {
     return (
       <div>
+        <EditorHeader
+          publish={this.publishStory}
+          loading={this.state.loading}
+        />
         <div className="container-fluid main-container">
           <div
             className="row animated fadeInUp"
