@@ -15,6 +15,7 @@ class Editor extends Component {
       title: "",
       text: "",
       description: "",
+
       imgSrc: null,
       loading: false,
       tags: [],
@@ -31,10 +32,9 @@ class Editor extends Component {
     const formData = {
       title: document.getElementById("editor-title").value,
       text: this.state.text,
-      description: this.state.description,
+      description: null,
       imgSrc: this.state.imgSrc,
-
-      user: this.props.user.name,
+      username: this.props.user.userData.username,
       likes: 0,
       tags: null,
     };
@@ -52,9 +52,7 @@ class Editor extends Component {
 
     fetch("http://localhost:8000/models/posts/", options)
       .then((r) => r.json())
-      .then(() => {
-        this.setState({ loading: false });
-      })
+
       .catch((err) => {
         console.log(err);
         this.setState({ loading: false });
@@ -142,6 +140,7 @@ class Editor extends Component {
     });
   }
   render() {
+    // console.log(this.props.user.userData);
     return (
       <div>
         <EditorHeader
@@ -168,10 +167,10 @@ class Editor extends Component {
                 <div className="post-info">
                   <div data-react-className="PopoverLink" data-react-props="">
                     <span className="popover-link" data-reactroot="">
-                      <a href="">{this.props.user.name}</a>
+                      <a href="">{this.props.user.userData.username}</a>
                     </span>
                   </div>
-                  <small>{this.props.user.email}</small>
+                  <small>{this.props.user.userData.email}</small>
                 </div>
               </div>
               <form className="editor-form main-editor" autoComplete="off">
