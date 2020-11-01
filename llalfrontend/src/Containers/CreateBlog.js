@@ -32,11 +32,11 @@ class Editor extends Component {
     const formData = {
       title: document.getElementById("editor-title").value,
       text: this.state.text,
-      description: null,
-      imgSrc: this.state.imgSrc,
+      description: "hhelo",
+      imgSrc: "hello",
       username: this.props.user.userData.username,
       likes: 0,
-      tags: null,
+      tags: "france",
     };
 
     const options = {
@@ -130,17 +130,18 @@ class Editor extends Component {
         text: "Tell your story...",
       },
     });
+    // console.log(editor);
     editor.subscribe("editableInput", (ev, editable) => {
       if (typeof document !== "undefined")
         this.setState({
           title: document.getElementById("editor-title").value,
-          text: editor.getContent(0),
+          text: editor.elements[0].innerText,
           description: `${editor.getContent(0).substring(0, 30).toString()}...`,
         });
     });
   }
   render() {
-    // console.log(this.props.user.userData);
+    // console.log(this.state.text);
     return (
       <div>
         <EditorHeader
@@ -203,7 +204,7 @@ class Editor extends Component {
                 <div className="form-group">
                   <textarea
                     id="medium-editable"
-                    className="medium-editable"
+                    className="medium-editable main-text"
                   ></textarea>
                 </div>
                 <div className="hidden">

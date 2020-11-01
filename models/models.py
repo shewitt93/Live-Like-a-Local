@@ -42,4 +42,4 @@ class Post(models.Model):
     
 
     def __str__(self):
-        return f'{self.title},{self.text},{self.description},{self.imgSrc},{self.username},{self.likes},{self.tags},{self.created_at}'
+        return f'{self.title},{self.text},{self.description},{self.imgSrc},{self.username},{self.likes},{self.tags},ås{self.created_at}'
