@@ -51,22 +51,12 @@ class Editor extends Component {
     console.log(options);
 
     fetch("http://localhost:8000/models/posts/", options)
-      .then((r) => r.json())
+      .then((r) => r.json().then(this.setState({ loading: false })))
 
       .catch((err) => {
         console.log(err);
         this.setState({ loading: false });
-      }); // axios
-    //   .post(`${_url}article`, formdata)
-    //   .then((res) => {
-    //     this.setState({
-    //       loading: false,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     this.setState({ loading: false });
-    // });
+      });
   }
   handleClick() {
     this.refs.fileUploader.click();
@@ -130,18 +120,16 @@ class Editor extends Component {
         text: "Tell your story...",
       },
     });
-    // console.log(editor);
     editor.subscribe("editableInput", (ev, editable) => {
       if (typeof document !== "undefined")
         this.setState({
           title: document.getElementById("editor-title").value,
-          text: editor.elements[0].innerText,
+          text: editor.getContent(0),
           description: `${editor.getContent(0).substring(0, 30).toString()}...`,
         });
     });
   }
   render() {
-    // console.log(this.state.text);
     return (
       <div>
         <EditorHeader
