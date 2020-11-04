@@ -17,6 +17,7 @@ django-rest-auth = "*"
 django-allauth = "*"
 psycopg2-binary = "*"
 coverage = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"

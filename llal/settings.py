@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'social_django.middleware.SocialAuthExceptionMiddleware',
-     'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -74,13 +74,7 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-     'http://localhost:5000',
-      'http://localhost:8000',
-      'https://localhost:3000',
-      
-)
+CORS_ORIGIN_ALLOW_ALL = True
 import datetime
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'llal.utils.my_jwt_response_handler',

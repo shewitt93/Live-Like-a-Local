@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from models.models import Post
 from rest_framework import viewsets
+from rest_framework.parsers import MultiPartParser, FormParser
 
 @api_view(['GET'])
 def current_user(request):
@@ -39,6 +40,7 @@ class UserList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PostViewSet(APIView):
+   
     def post(self, request):
          serializer = PostSerializer(data=request.data)
          if serializer.is_valid():
