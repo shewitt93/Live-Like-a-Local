@@ -29,11 +29,20 @@ class Editor extends Component {
       loading: true,
     });
 
+    const files = this.state.imgSrc;
+    const data = new FormData();
+    data.append("file", files);
+    data.append("upload_preset", "live like a local");
+    fetch("https://api.cloudinary.com/v1_1/dbpoqrxvq/upload", {
+      method: "POST",
+      body: data,
+    }).then((r) => console.log(r.json()));
+
     const formData = {
       title: document.getElementById("editor-title").value,
       text: this.state.text,
-      description: "hhelo",
-      imgSrc: "hello",
+      description: this.state.description,
+      imgSrc: this.state.imgSrc,
       username: this.props.user.userData.username,
       likes: 0,
       tags: "france",
@@ -63,9 +72,28 @@ class Editor extends Component {
   }
   previewImg() {
     const file = this.refs.fileUploader.files[0];
+    const files = file;
+    const data = new FormData();
+    data.append("file", files);
+    data.append("upload_preset", "live like a local");
+    fetch("https://api.cloudinary.com/v1_1/dbpoqrxvq/upload", {
+      method: "POST",
+      body: data,
+    })
+      .then((r) => r.json())
+      .then((data) => console.log(data.url));
+    // const options = {
+    //   method: "POST",
+    //   body: file,
+    // };
+    // fetch(
+    //   "https://api.cloudinary.com/v1_1/dbpoqrxvq/image/upload",
+    //   options
+    // ).then((r) => console.log(r.json()));
     var reader = new FileReader();
     reader.onload = function (e) {
       document.getElementById("image_preview").src = e.target.result;
+
       this.setState({
         imgSrc: file /*e.target.result*/,
       });
