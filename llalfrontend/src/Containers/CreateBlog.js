@@ -81,7 +81,7 @@ class Editor extends Component {
       body: data,
     })
       .then((r) => r.json())
-      .then((data) => console.log(data.url));
+      .then((data) => this.setState({ imgSrc: data.url }));
     // const options = {
     //   method: "POST",
     //   body: file,
@@ -94,9 +94,9 @@ class Editor extends Component {
     reader.onload = function (e) {
       document.getElementById("image_preview").src = e.target.result;
 
-      this.setState({
-        imgSrc: file /*e.target.result*/,
-      });
+      // this.setState({
+      //   imgSrc: file /*e.target.result*/,
+      // });
     }.bind(this);
     reader.readAsDataURL(file);
   }

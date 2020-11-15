@@ -14,7 +14,14 @@ class Home extends Component {
   render() {
     console.log(this.props.user);
     const Blog = this.props.user.blogPost.map((blog, index) => (
-      <BlogPost key={index} blog={blog.blog} />
+      <BlogPost
+        key={index}
+        title={blog.title}
+        image={blog.imgSrc}
+        description={blog.description}
+        username={blog.username}
+        likes={blog.likes}
+      />
     ));
     return (
       <div className="wrapper">
