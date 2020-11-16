@@ -10,6 +10,7 @@ import reset from "./components/reset";
 import BlogPage from "./Containers/BlogPage";
 import NavBar from "./components/NavBar";
 import CreateBlog from "./Containers/CreateBlog";
+import blogMain from "./components/Blog/blogMain";
 
 class App extends React.Component {
   render() {
@@ -23,6 +24,7 @@ class App extends React.Component {
           <Route path="/register" component={SignupForm} />
           <PrivateRoute path="/home" component={Home} />
           <Route path="/blogs" component={BlogPage} />
+          <Route path="/blog/:id" component={blogMain} />
           <Route path="/create" component={CreateBlog} />
           <PrivateRoute path="/settings" component={Settings} />
         </Switch>

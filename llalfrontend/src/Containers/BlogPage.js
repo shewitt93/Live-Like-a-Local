@@ -21,6 +21,7 @@ class Home extends Component {
         description={blog.description}
         username={blog.username}
         likes={blog.likes}
+        id={blog.id}
       />
     ));
     return (
