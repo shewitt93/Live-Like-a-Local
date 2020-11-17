@@ -10,11 +10,17 @@ const createPost = (data) => ({
   type: "CREATE_POST",
   payload: data,
 });
+const getPost = (data) => ({
+  type: "GET_POST",
+  payload: data,
+});
 export const setGeoLocation = (data) => ({
   type: "SET_LATLNG",
   payload: data,
 });
+
 export const selectGeoLocation = (state) => state.geoLocation;
+
 export const getUser = () => async (dispatch) => {
   try {
     const options = {

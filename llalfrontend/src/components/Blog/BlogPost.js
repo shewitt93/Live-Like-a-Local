@@ -4,12 +4,12 @@ export default ({ id, title, description, image, likes, username }) => (
     <a href={`http://localhost:3000/Blog/${id}`}>
       <img src={image}></img>
       <h3>{title}</h3>
-      <p>{description}</p>
-      <div>
-        {" "}
-        <p>{username}</p>
-        <a>{likes}</a>
-      </div>
+      <p className="" dangerouslySetInnerHTML={{ __html: description }}></p>
     </a>
+    <div>
+      {" "}
+      <p>{username}</p>
+      <p>{likes}</p>
+    </div>
   </div>
 );
